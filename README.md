@@ -5,7 +5,7 @@ Directorate of Industries and commerce is an organization responsible for regist
 
 This project provides the following solutions to the department:
 
-*Digitization of FIRMS / NGO’s / SOCIETIES and MADRASSAS Registration Record for Directorate of Industries and Commerce.
-*Workflow automation of Registration process of above Organizations.
-*Infrastructure development by establishing computer Network (Client Server Model)
-*Development of responsive website for general public, so that public could get information about Directorate’s working.
+* Digitization of FIRMS / NGO’s / SOCIETIES and MADRASSAS Registration Record for Directorate of Industries and Commerce.
+* Workflow automation of Registration process of above Organizations.
+* Infrastructure development by establishing computer Network (Client Server Model)
+* Development of responsive website for general public, so that public could get information about Directorate’s working.
