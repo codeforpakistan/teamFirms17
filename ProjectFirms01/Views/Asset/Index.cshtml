@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlAsset>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    <ol class="breadcrumb">
+        <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Asset</li>
+    </ol>
+
+    <p>
+        @Html.ActionLink("New Asset", "Create")       
+    </p>
+
+<table id="example1" class="table table-striped table-responsive table-fixedheader  table-bordered ">
+    <thead>
+        <tr>
+            <th>
+                Org FileNo
+            </th>
+            <th>
+                Asset Name
+
+            </th>
+            <th>
+                Asset Value
+            </th>
+
+            <th>
+                Purchased Date
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                IsActive
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem=> item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AssetID })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+}
+
+
+
+
+@section FooterArea{
+
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

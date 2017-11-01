@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Test";
+}
+  
+ 
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.flat.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
+    <script src="~/scripts/Kendo/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/kendo.all.min.js" type="text/javascript"></script>
+    <h1>TEST</h1>
+     <div class="col-sm-3 col-md-3 col-lg-3">
+         <select id="TEST1" multiple="multiple"></select>
+
+    </div>
+    <div>
+        <button id="Test" name="TEST">TEST</button>
+    </div>
+        <script type="text/javascript">
+
+
+            $("#TEST1").kendoMultiSelect({
+                filter: "startswith",
+                dataTextField: "Label",
+                dataValueField: "Value",
+                select: onSelect,
+                placeholder: "Select Business",
+               // height: 100,
+                autoBind: false,
+                dataSource: {
+                 //   type: "GET",
+                    dataType: "json",
+                    traditional: true,
+                    asyn: true,
+                    serverFiltering: true,
+                    transport: {
+                        read: {
+                            url: "/Firm/GETTEST"
+
+                        },
+
+                    }
+                }
+            });
+            function onSelect(e) {
+                var dataItem = this.dataSource.view()[e.item.index()];
+                onchng(dataItem.Value);
+            }
+
+
+            function onchng(id) {
+                var checkarr = [];
+                checkarr.push(id);
+                console.log(checkarr);
+            }
+
+            //$("#TEST").change(function () {
+
+            //    getdata();
+
+            //});
+
+            //function getdata() {
+
+            //    var selectedData = [];
+            //    var multiselect = $("#TEST").data("kendoMultiSelect").value();
+
+
+
+
+            //    $.each(multiselect, function (index, value) {
+            //        //console.log(1);
+            //        selectedData.push(value);
+            //        console.log(selectedData);
+            //    });
+            //    //   var selectedData = [];
+            //    //var items = multiselect.value();
+            //    //for (var i = 0; i < items.length; i++) {
+            //    //    selectedData.push(items[i]);
+            //    //    console.log(selectedData);
+            //    //}
+            //    //  AssigneeId = $('#BusinessType_ID option:selected').val();
+            //    //  console.log(AssigneeId);
+            //    // var AssigneeIdsArray = [];
+
+            //    //  var multiSelectValueEmp = $("#BusinessType_ID").data("kendoMultiSelect").value(); //Get KendoMulitSelect all selected values
+            //    //  console.log(multiSelectValueEmp);
+            //    //$.each(multiSelectValueEmp, function (index, value) {
+            //    //    // console.log(value);
+            //    //    AssigneeIdsArray.push(value);
+            //    //});
+            //};
+
+            // });
+            //function ClearPrjectFields() {
+            //alert("hi");
+            //}
+
+
+
+
+
+        </script>
+    <script>
+        $('body').on('click', '#Test', function () {
+
+            // var selectedData = [];
+
+            // var abc = $("#TEST1").data("kendoDropDownList").value()
+            var multiSelect = $("#TEST1").data("kendoMultiSelect").value();
+            //   var val = multiSelect.value().slice();
+            alert(multiSelect);
+            // var multiselect=$("#TEST1").data("kendoMultiSelect").value([]);
+            // var multiselect = $('#TEST1').data("kendoMultiSelect").value();
+            //$.each(multiselect, function (index, value) {
+            //    //console.log(1);
+            //    selectedData.push(value);
+            //    //console.log(selectedData);
+            //});
+            // alert(multiselect);
+        });
+
+    </script>
+
+
+
+
+@*<html>
+    <head>
+        <title>Fasionablewatches.com</title>
+    </head>
+
+    <body>
+        <h1>Fasionablewatches.com</h1>
+        <center>
+            <img src="image/A1.jpg" style="width:150px; height:60px;"><br>&nbsp;<br><hr>
+            <h3>HOME| GENTS WATCHES | LADIES WATCHES | CONTACT</h3>
+            <marquee><h4>Welcome To choose your Fashon of Watches</h4></marquee>
+            <img src="image/A1.jpg" style="width:300px;height:180px">
+            <img src="image/A2.jpg" style="width:300px;height:180px">
+            <img src="image/A3.jpg" style="width:300px;height:180px">
+            <img src="image/A4.jpg" style="width:300px;height:180px">
+            <img src="image/A5.jpg" style="width:300px;height:180px">
+            <img src="image/A6.jpg" style="width:300px;height:180px">
+            <img src="image/A7.jpg" style="width:300px;height:180px">
+            <img src="image/A8.jpg" style="width:300px;height:180px">
+            <img src="image/A9.jpg" style="width:300px;height:180px">
+            <br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;
+            <br>&nbsp;<br>
+            <hr>copyright scopy 2014 all right Reserved: SMUJ.COM
+        </center>
+    </body>
+
+    </html>*@

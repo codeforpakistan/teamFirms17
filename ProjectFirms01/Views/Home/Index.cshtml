@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    <div class="content-header">
+
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+
+
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <a href="/Firm" style="color:white">
+                        <h3>
+                            Firm
+                        </h3>
+                        <p>
+                            Registrations
+                        </p>
+                    </a>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                <a href="/Firm" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+
+
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <a href="/Madrassa" style="color:white">
+                        <h3>
+                            Madrassa
+                            @*53<sup style="font-size: 20px">%</sup>*@
+                        </h3>
+                        <p>
+                            Registrations
+                        </p>
+                    </a>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                    @*<i class="glyphicon glyphicon-pawn"></i>*@
+                </div>
+                <a href="/Madrassa" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <a href="/SocietyNGO" style="color:white">
+                        <h3>
+                            NGO/Society
+                        </h3>
+                        <p>
+                            Registrations
+                        </p>
+                    </a>
+                </div>
+                <div class="icon">
+                    @*<i class="ion ion-person-add"></i>*@
+                    <i class="fa fa-cubes"></i>
+                </div>
+                <a href="/SocietyNGO" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <a href="/Report" style="color:white">
+                        <h3>
+                            Reports
+                        </h3>
+                        <p>
+                            Browse
+                        </p>
+                    </a>
+                </div>
+                <div class="icon">
+                    @*<i class="ion ion-pie-graph"></i>*@
+                    <i class="fa fa-print"></i>
+                </div>
+                <a href="/Report" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- top row -->
+    <div class="row">
+        <div class="col-xs-12 connectedSortable">
+        </div><!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+        
+        <section class="col-lg-6 connectedSortable">
+         
+            <div class="box box-danger" id="loading-example">
+                <div class="box-header">
+                 
+                    <div class="pull-right box-tools">
+                        <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
+                        <button class="btn btn-danger btn-sm" data-widget='collapse' data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                    </div> 
+                    @*<i class="fa fa-cloud"></i>*@
+                    <h3 class="box-title">Registered Organizations Count</h3>
+                </div> 
+                <div class="box-body no-padding">
+                    <div class="row">
+                        <div id="Counttable">
+
+
+                        </div>
+
+
+
+                        <script>
+                            GetCounttable();
+                            function GetCounttable() {
+                                // alert("HI");
+                                //  return false;
+
+                                $.ajax({
+                                    url: '/Home/GetCounttable',
+                                    type: 'GET',
+                                    dataType: "html",
+                                    data: {},
+                                    success: function (data) {
+                                        console.log(data);
+                                        $("#Counttable").html("").append(data);
+
+
+                                        //if (response == 'success')
+                                        //    window.location.replace("home");
+                                        //else if (response == "failed")
+                                        //    window.location.replace("failed");
+                                        //else
+                                        //    $("#message").html("<div class='error_log'><p class='error'>Invalid username and/or password.</p></div>");
+
+
+                                    },
+                                    error: function () {
+                                        // toastr.error(data.message);
+                                    }
+                                });
+                            }
+                        </script>
+
+                    @*    <div class="col-sm-7">
+
+                            <div class="chart" id="bar-chart" style="height: 250px;">
+
+
+                               <div id="Counttable">
+
+
+            </div>
+
+
+
+            <script>
+                GetCounttable();
+                function GetCounttable() {
+                    // alert("HI");
+                    //  return false;
+
+                    $.ajax({
+                        url: '/Home/GetCounttable',
+                        type: 'GET',
+                        dataType: "html",
+                        data: {},
+                        success: function (data) {
+                            console.log(data);
+                            $("#Counttable").html("").append(data);
+
+
+                            //if (response == 'success')
+                            //    window.location.replace("home");
+                            //else if (response == "failed")
+                            //    window.location.replace("failed");
+                            //else
+                            //    $("#message").html("<div class='error_log'><p class='error'>Invalid username and/or password.</p></div>");
+
+
+                        },
+                        error: function () {
+                            // toastr.error(data.message);
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </div>*@
+                         
+                    </div> 
+                </div> 
+               
+            </div> 
+         
+           
+        </section> 
+     
+        <section class="col-lg-6 connectedSortable">
+          
+            <div class="box box-primary">
+                <div class="box-header">
+                
+                    <div class="pull-right box-tools">
+                        <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
+                        <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+                    </div> 
+                    <i class="fa fa-map-marker"></i>
+                    <h3 class="box-title">
+                        Visitors
+                    </h3>
+                </div>
+       
+            </div>
+          
+            
+        </section>
+    </div>
+
+  
+}
+
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}
+
+
+
+
+
+

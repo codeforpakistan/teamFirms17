@@ -1,0 +1,245 @@
+﻿@model BusinessLayer.MdlClasses.MdlWitness
+@{
+    ViewBag.Title = "CreateMadrassaWitness";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+ 
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+    @{
+        var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgDocIdSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgDocId);
+
+    }
+    <style>
+            .form-horizontal .control-label {
+                text-align: left;
+                width: 100%;
+            }
+            /*.form-control {
+            width: 400px;
+        }*/
+    </style>
+
+    @*<link href="~/Content/dd.css" rel="stylesheet" />
+
+
+   
+
+    <script src="~/Scripts/jquery.dd.js"></script>
+
+    <style>
+        .dd .ddArrow {
+            background-image: url(../images/ESSarrow.png);
+        }
+    </style>*@
+    <h2>Add Madrassa Witness</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-horizontal  col-sm-5">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.WitnessID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.WitnessID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WitnessID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                @if (sig != null)
+                {
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Madrassa Name:</label>
+                        <div class="col-md-11">
+
+                            <strong class="form-label">@sig.OrgName</strong>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">File #:</label>
+                        <div class="col-md-11">
+
+                            <strong class="form-label">@sig.OrgRegNo</strong>
+
+                        </div>
+                    </div>
+                    <input type="hidden" value="@sig.OrgDocID" name="OrgDoc_ID" id="OrgDoc_ID" />
+
+                    @*<div class="form-group">
+
+                            <div class="col-md-11">
+                                <input type="hidden" value="@sig.OrgDocID" name="OrgDoc_ID" id="OrgDoc_ID" />
+
+                            </div>
+                        </div>*@
+                }
+
+                else
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Madrassa/File#</label>
+                        <div class="col-md-11">
+                            <select class="form-control OrgDoc_ID" name="OrgDoc_ID" id="OrgDoc_ID" style="background:#fff">
+
+                                <option value="0">--Select Madrassa/File #--</option>
+
+                                @foreach (var item in @Model.GetAllOrgDocId)
+                                {
+                                    <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                }
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness Name</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness CNIC</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessCNIC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessCNIC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness Old NIC</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessONIC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessONIC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness Address</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness Contact #</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Witness Mobile #</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.WitnessMobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WitnessMobileNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-11">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6" style="margin-top: 62px;">
+                <div id="OrgwitnessList">
+                    @*@Html.Partial("~/Views/Partner/PartialViews/_OrgPartnerList.cshtml")*@
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "MadrassaWitnessList")
+    </div>
+    <script>
+            $('#WitnessCNIC').focusin(function () {
+                $('#WitnessCNIC').mask("99999-9999999-9");
+            });
+            $('#WitnessContactNo').focusin(function () {
+                $('#WitnessContactNo').mask("999-999-9999");
+            });
+
+            $('#WitnessMobileNo').focusin(function () {
+                $('#WitnessMobileNo').mask("9999-9999999");
+            });
+
+            $(document).ready(function () {
+                $(".OrgDoc_ID").msDropDown();
+
+            });
+
+            GetWitnessList();
+
+            function GetWitnessList() {
+                // alert("HI");
+                //  return false;
+                var ID
+                if ($('#OrgDoc_ID option:selected').val() == undefined) {
+                    ID = $.trim($('#OrgDoc_ID').val());
+                }
+                else {
+                    ID = $('#OrgDoc_ID option:selected').val();
+                }
+                $.ajax({
+                    url: '/Witness/ListOfWitness',
+                    type: 'GET',
+                    dataType: "html",
+                    data: { Id: ID },
+                    success: function (data) {
+                        $("#OrgwitnessList").html("").append(data);
+
+                    },
+                    error: function () {
+                        // toastr.error(data.message);
+                    }
+                });
+            }
+
+            //$('#AssigneeId option:selected').val();
+            $('#OrgDoc_ID').on('change', function () {
+                GetWitnessList();
+
+            });
+
+    </script>
+
+
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

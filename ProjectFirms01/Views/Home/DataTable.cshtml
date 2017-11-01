@@ -1,0 +1,34 @@
+﻿ 
+
+@{
+    ViewBag.Title = "DataTable";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+ 
+ <input type="checkbox"   checked='checked' />
+<script type="text/javascript">   
+    $('input[type=checkbox]').click(function () {
+        alert("hi");       
+    });    
+</script>
+
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

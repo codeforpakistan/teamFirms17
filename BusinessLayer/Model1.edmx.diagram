@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="726f839615ac4ee6acc4f3e514a8757c" Name="Diagram1">
+        <EntityTypeShape EntityType="dbFirmsModel.ADDRESSS" Width="1.5" PointX="8.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.BUSINESSTYPE" Width="1.5" PointX="0.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.DISTRICT" Width="1.5" PointX="10.625" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.DOCUMENT" Width="1.5" PointX="2.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.ORGANIZATION" Width="1.5" PointX="2.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.ORGDOC" Width="1.5" PointX="5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.ORGDOCNAME" Width="1.5" PointX="6.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.ORGTYPE" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.PARTNER" Width="1.5" PointX="6.875" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.ROLE" Width="1.5" PointX="8.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.TEHSIL" Width="1.5" PointX="10.625" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.USER" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.USERROLE" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmsModel.WITNESS" Width="1.5" PointX="4.875" PointY="10.875" IsExpanded="true" />
+        <AssociationConnector Association="dbFirmsModel.FK_ADDRESSS_ORGDOC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_ADDRESSS_TEHSIL" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_TEHSIL_DISTRICT" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_ORGDOC_DOCUMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_ORGANIZATION_ORGTYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_ORGDOC_ORGANIZATION" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_ORGDOCNAME_ORGDOC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_PARTNER_ORGDOC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.FK_WITNESS_ORGDOC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmsModel.ORGBZNS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbFirmsModel.ADRESSTYPE" Width="1.5" PointX="15.5" PointY="6" />
+        <EntityTypeShape EntityType="dbFirmsModel.DESIGNATION" Width="1.5" PointX="16" PointY="2.625" />
+        <EntityTypeShape EntityType="dbFirmsModel.FEETYPE" Width="1.75" PointX="14.25" PointY="3" />
+        <EntityTypeShape EntityType="dbFirmsModel.ORGFEE" Width="1.5" PointX="8.625" PointY="3.375" />
+        <EntityTypeShape EntityType="dbFirmsModel.View_ORGnName" Width="1.5" PointX="13.75" PointY="6.25" />
+        <EntityTypeShape EntityType="dbFirmsModel.BANK" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.ASSET" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.ASSOCIATION" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.BACCOUNT" Width="1.5" PointX="11.75" PointY="12.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.FUND" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.PARTNERSHARE" Width="1.5" PointX="13.75" PointY="11.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.RENREPORT" Width="1.5" PointX="15.75" PointY="8.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.AUDITREPORT" Width="1.5" PointX="14.375" PointY="15.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.PROJECT" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.STAFF" Width="1.5" PointX="16.375" PointY="12.75" />
+        <EntityTypeShape EntityType="dbFirmsModel.PARTNERNAMEnADD" Width="1.5" PointX="7.375" PointY="17.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

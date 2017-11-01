@@ -1,0 +1,133 @@
+﻿@model BusinessLayer.MdlClasses.MdlADDRESSS
+
+@{
+    ViewBag.Title = "Details";
+ 
+
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>MdlADDRESSS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgDoc_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgDoc_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressType_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressType_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tehsil_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tehsil_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnterByUser_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnterByUser_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyByUser_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyByUser_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyByDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyByDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActiveDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

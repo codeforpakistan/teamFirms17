@@ -1,0 +1,88 @@
+﻿
+@model IEnumerable<BusinessLayer.MdlClasses.MdlUserLogin>
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+ 
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    <ol class="breadcrumb">
+        <li><a href="/Firm"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">User List</li>
+    </ol>
+
+    <p>
+        @Html.ActionLink("Add User", "NewUserRegistration")       
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+              User Name
+            </th>
+            <th>
+               User Email
+            </th>
+            <th>
+             Contact #
+            </th>
+            <th>
+               Is Active
+            </th>
+            
+           
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActiveString)
+                </td>
+                
+                
+                
+                 
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserID })
+                 
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

@@ -1,0 +1,95 @@
+﻿
+@model BusinessLayer.MdlClasses.MdlPartner
+ 
+<style>
+    
+
+    .form-control {
+        width: 400px;
+    }
+</style>
+ 
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" >Deactivate Partner</h4>
+
+        </div>
+        <div class="modal-body">
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label ">Organization/File#</label>
+                    <div>
+                        <select class="form-control OrgDoc_ID" name="OrgDoc_ID" id="OrgDoc_ID" style="background:#fff">
+
+                            <option value="0">--Select Organization/File #--</option>
+
+                            @foreach (var item in @Model.GetAllOrgId)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                            }
+                        </select>
+
+                    </div>
+
+                </div>
+                @*<div class="col-sm-12 col-md-2 col-lg-2"><label>Company_Name</label></div>
+                <div class="col-sm-12 col-md-4 col-lg-4"><input type="text" id="Company_Name" class="text-field" /></div>
+
+                <div class="col-sm-12 col-md-2 col-lg-2"><label>Company_Address</label></div>
+                <div class="col-sm-12 col-md-4 col-lg-4"><input type="text" id="Company_Address" class="text-field" /></div>*@
+            </div>
+
+        </div>
+        <div class="modal-footer">
+
+
+            <button type="button" id="btnDeactivatePartner" style="height:35px;width:80px;font-size:12px" data-dismiss="modal" class="btn-save">Save</button>
+
+
+
+            <button type="button" id="issueCancel" style="height:35px;width:80px;font-size:12px" class="btn-cancel" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+
+
+    $('#btnDeactivatePartner').click(function () {
+        $('#myModal').modal({ hide: true });
+        //$("#issueCancel").trigger("click");
+
+        $('#Close_ProjectModal').modal("show")
+
+    });
+
+    //$('#btnConform').click(function () {      
+    //    //$('#myModal').modal({ show: true });
+    //    //$('#Close_ProjectModal').modal({ hide: true });
+    
+    //    //$("#issueCancel").trigger("click");
+      
+    //    $('#Close_ProjectModal').modal("hide")
+    //    $('#myModal').modal("show");
+
+
+
+    //    var abc = $('#OrgDoc_ID option:selected').val();
+    //    alert(abc);
+    //});
+
+       
+    //$(document).ready(function () {
+    //    $(".OrgDoc_ID").msDropDown();
+    //});
+</script>

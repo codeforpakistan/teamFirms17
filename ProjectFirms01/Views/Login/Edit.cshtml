@@ -1,0 +1,204 @@
+﻿@model BusinessLayer.MdlClasses.MdlUserLogin
+
+@{
+    ViewBag.Title = "Update User Info";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    @*@{
+            var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgDocIdSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgDocId);
+
+        }*@
+
+    <style>
+        /*.form-control {
+            width: 400px;
+        }
+
+        .form-horizontal .control-label {
+            width: 110px;
+        }*/
+    </style>
+
+    <link href="~/Content/dd.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery.dd.js"></script>
+    <style>
+        .dd .ddArrow {
+            background-image: url(../images/ESSarrow.png);
+        }
+    </style>
+
+    <h2>Update User Info</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+           
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="hidden" id="UserID" name="UserID" value="@Model.UserID"  />
+                    <label class="control-label ">User Name</label>
+                    <div>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="control-label">Password</label>
+
+                    <div>
+                        <input type="password" id="Password" name="Password" value="@Model.Password" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label ">User Email</label>
+                    <div>
+                        @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="control-label">User Contact No</label>
+
+                    <div>
+                        <input type="text" id="UserContactNo" value="@Model.UserContactNo" class=" form-control" name="UserContactNo" />
+
+                        @Html.ValidationMessageFor(model => model.UserContactNo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">Role Name</label>
+                    <div>
+                        <select class="form-control Role_ID" name="Role_ID" id="Role_ID" style="background:#fff">
+
+                            <option value="0">--Select Role--</option>
+
+                            @foreach (var item in @Model.UserRoleDrp)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                @*<div class="col-sm-6">
+
+                    </div>*@
+            </div>
+
+
+
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-6">
+
+                    <div class="">
+                        <input type="submit" id="UpdateNewUser" value="Update User Info" class="btn btn-default" />
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+ 
+        </div>
+
+
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "UserList")
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        $('#UserContactNo').focusin(function () {
+            $('#UserContactNo').mask("999-999-9999");
+        });
+
+        $("#UpdateNewUser").click(function () {
+            $("#UserName").removeClass("errorClass");
+            $("#Password").removeClass("errorClass");
+         //   $("#UserEmail").removeClass("errorClass");
+          //  $("#UserContactNo").removeClass("errorClass");
+            $("#Role_ID_title").removeClass("errorClass");
+
+            var isErrorOccurd = true;
+            if ($.trim($("#UserName").val()) == "") {
+                $("#UserName").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#Password").val()) == "") {
+                $("#Password").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+             
+            if ($('#Role_ID option:selected').val() == 0) {
+
+                $("#Role_ID_title").addClass("errorClass");
+                isErrorOccurd = false;
+            }
+
+
+            return isErrorOccurd;
+        });
+
+        $(document).ready(function () {
+
+            $(".Role_ID").msDropDown();
+
+        });
+
+
+        
+
+
+
+    </script>
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+    }

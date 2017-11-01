@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlAuditReport>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    <ol class="breadcrumb">
+        <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Audit Reports</li>
+    </ol>
+
+    <p>
+        @Html.ActionLink("New Renewal Report", "Create")
+    </p>
+
+    <table id="example1" class="table table-striped table-responsive table-fixedheader  table-bordered ">
+        <thead>
+            <tr>
+                <th>
+                    File No
+                </th>
+                <th>
+                    Renewal Report
+                </th>
+                <th>
+                    Audit Report Year
+                </th>
+                <th>
+                    Chartered Accountant
+                </th>
+
+                <th>
+                    Total Donation
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Org_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RenewalReport_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AuditReportYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CharteredAcct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem=> item.TotalDonation)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AuditReportID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+}
+
+
+
+
+@section FooterArea{
+
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

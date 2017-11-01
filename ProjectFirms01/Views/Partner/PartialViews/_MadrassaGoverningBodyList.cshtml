@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<BusinessLayer.MdlClasses.MdlPartner>
+
+<table class="table table-responsive table-striped table-bordered">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            CNIC
+        </th>
+        <th>
+            Address
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.PartnerName
+            </td>
+            <td>
+                @item.PartnerCNIC
+            </td>
+            <td>
+                @item.PartnerAddress 
+            </td>
+        </tr>
+    }
+</table>

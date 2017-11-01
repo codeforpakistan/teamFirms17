@@ -1,0 +1,133 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlWitness>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+<ol class="breadcrumb">
+    <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li><a href="/Firm">Firm</a></li>
+    <li class="active">Witness</li>
+</ol>
+
+<p>
+    @Html.ActionLink("Add New Witness", "Create")
+</p>
+<table id="example1" class="table table-responsive table-striped table-bordered datatable">
+  
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.WitnessID)
+                </th>*@
+            <th>
+              Witness Name
+            </th>
+            <th>
+                Witness CNIC
+            </th>
+            <th>
+                Witness Old NIC
+            </th>
+            <th>
+                Witness Address
+            </th>
+            <th>
+                Witness Contact #
+            </th>
+            <th>
+                Witness Mobile #
+            </th>
+            <th>
+                OrgDoc_ID
+            </th>
+          
+            <th>
+                EnterByUser_ID
+            </th>
+
+            
+
+            <th>
+                Status
+            </th>
+           
+            <th>Action</th>
+        </tr>
+    </thead> 
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.WitnessID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessCNIC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessONIC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WitnessMobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrgDoc_ID)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.WitnessPassportNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WitnessCitizenNo)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnterByUser_ID)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>*@
+
+                <td>
+                <input type="checkbox" checked="@item.IsActive" />
+                 </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.IsActiveDate)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.WitnessID })
+
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })|
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

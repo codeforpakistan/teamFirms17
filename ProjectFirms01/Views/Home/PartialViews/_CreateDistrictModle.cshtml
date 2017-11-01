@@ -1,0 +1,114 @@
+﻿@model BusinessLayer.MdlClasses.MdlDistrictandTehsils
+
+<style>
+    .form-control {
+        width: 400px;
+    }
+       .errorClass {
+            border: 2px solid red;
+        }
+</style>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <input type="hidden" id="DistrictID" value="@Model.DistrictID" />
+            @if (Model.DistrictID != 0)
+            {
+                <h4 class="modal-title"> Update   District</h4>
+            }
+            else
+            {
+                <h4 class="modal-title"> Create District</h4>
+            }
+           
+
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <label class="control-label">District Name</label>
+                    <div>
+                        <input type="text" id="DistrictName" name="DistrictName" placeholder="Enter Distrcit Name" value="@Model.DistrictName" class="form-control" />
+                       
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+ 
+
+                </div>
+            </div>
+
+             
+
+        </div>
+        <div class="modal-footer">
+            @if (Model.DistrictID != 0)
+            {
+                <button type="button" id="btnCreateDistrict" style="height:35px;width:80px;font-size:12px" class="btn-save">Update</button>
+
+            }
+            else
+            {
+                  <button type="button" id="btnCreateDistrict" style="height:35px;width:80px;font-size:12px"    class="btn-save">Save</button>
+              
+            }
+
+          
+            <button type="button" id="issueCancel" style="height:35px;width:80px;font-size:12px" class="btn-cancel" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+
+    $('#btnCreateDistrict').click(function () {
+
+        var DistName = $.trim($("#DistrictName").val());
+        var DistrictID = $.trim($("#DistrictID").val());
+
+        if (DistName == "") {
+            $("#DistrictName").addClass('errorClass');
+            return false;
+        }
+        else {
+            //$("#issueCancel").trigger("click");
+
+            // alert(OrgDoc_ID);
+
+            $.ajax({
+                url: '/Home/CreateDistrict',
+                type: 'POST',
+                data: { DistName: DistName, DistrictID: DistrictID },
+                success: function (data) {
+
+                    toastr.success(data.message);
+                    $("#issueCancel").trigger("click");
+                    location.reload();
+                    // alert(data.name);
+                },
+                error: function (data) {
+
+                    toastr.error(data.message);
+                    //  alert("error");
+                }
+            });
+        };
+
+    });
+</script>
+
+
+
+
+
+

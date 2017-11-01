@@ -1,0 +1,286 @@
+﻿@model BusinessLayer.MdlClasses.MdlPartner
+@{
+    ViewBag.Title = "GoverningBodywithAlterForm";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    @{
+        var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgDocIdSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgDocId);
+
+    }
+
+    <style>
+        .form-horizontal .control-label {
+            text-align: left;
+            width: 100%;
+        }
+    </style>
+
+
+    <h2>Add New Governing Body To Society/NGO </h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-horizontal col-sm-5">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @if (sig != null)
+                {
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Society Name/File #:</label>
+                        <div class="col-md-11">
+                            <strong class="form-label">@sig.OrgName</strong>
+                        </div>
+
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-md-2">File #:</label>
+                            <div class="col-md-11">
+                                <strong class="form-label">@sig.OrgRegNo</strong>
+                            </div>
+                        </div>*@
+                    <input type="hidden" value="@sig.OrgDocID" name="OrgDoc_ID" id="OrgDoc_ID" />
+
+                }
+
+
+
+                else
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Society/File#</label>
+                        <div class="col-md-11">
+                            <select class="form-control OrgDoc_ID" name="OrgDoc_ID" id="OrgDoc_ID" style="background:#fff">
+
+                                <option value="0">--Select Society/File #--</option>
+
+                                @foreach (var item in @Model.GetAllOrgDocId)
+                                {
+                                    <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Name</label>
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nationality</label>
+                    <div class="col-md-11">
+                        <select class="form-control" id='NationalityID' name="NationalityID" style="background:#fff">
+
+                            <option value="0">Nationality</option>
+                            <option value="1">Pakistani</option>
+                            <option value="2">Foreginer</option>
+                        </select>
+                    </div>
+                </div>
+                <div style='display:none;' id='foreginer'>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Citizen #</label>
+
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.PartnerCitizenNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PartnerCitizenNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Passport #</label>
+
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.PartnerPassportNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PartnerPassportNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div style='display:none;' id='national'>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">CNIC #</label>
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.PartnerCNIC, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PartnerCNIC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">ONIC #</label>
+
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.PartnerONIC, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PartnerONIC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Designation</label>
+                    <div class="col-md-11">
+                        <select class="form-control Designation_ID" name="Designation_ID" id="Designation_ID" style="background:#fff">
+
+                            <option value="0">--Select Designation--</option>
+
+                            @foreach (var item in @Model.Designation)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                            }
+                        </select>
+                    </div>
+
+
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Address</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Contact #</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Mobile #</label>
+
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerMobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerMobileNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-11">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="margin-top: 62px;">
+                <div id="OrgPartnerList">
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+
+
+
+    <div>
+        @Html.ActionLink("Back to List", "SocietyGoverningBodyAlterationList")
+    </div>
+
+    <script>
+
+     $('#PartnerCNIC').focusin(function () {
+         $('#PartnerCNIC').mask("99999-9999999-9");
+     });
+     $('#PartnerContactNo').focusin(function () {
+         $('#PartnerContactNo').mask("9999-9999999");
+     });
+
+     $('#PartnerMobileNo').focusin(function () {
+         $('#PartnerMobileNo').mask("9999-9999999");
+     });
+     $(document).ready(function () {
+         $(".Designation_ID").msDropDown();
+         $(".OrgDoc_ID").msDropDown();
+
+         $('#NationalityID').on('change', function () {
+
+             if (this.value == '1')
+                 //.....................^.......
+             {
+                 $("#national").show();
+             }
+             else if(this.value=='2') {
+                 $("#foreginer").show();
+             }
+             else if(this.value=='0') {
+                 $("#national").hide();
+                 $("#foreginer").hide();
+             }
+         });
+     });
+
+
+     GetPartnerList();
+
+     function GetPartnerList()
+     {
+         var ID
+         if ($('#OrgDoc_ID option:selected').val() == undefined) {
+             ID = $.trim($('#OrgDoc_ID').val());
+         }
+         else {
+             ID = $('#OrgDoc_ID option:selected').val();
+         }
+         $.ajax({
+             url: '/Partner/ListOfGoverningBody',
+             type: 'GET',
+             dataType: "html",
+             data: { Id: ID },
+             success: function (data) {
+                 $("#OrgPartnerList").html("").append(data);
+
+             },
+             error: function () {
+                 // toastr.error(data.message);
+             }
+         });
+     }
+
+
+     $('#OrgDoc_ID').on('change', function () {
+         GetPartnerList();
+
+     });
+
+
+    </script>
+
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

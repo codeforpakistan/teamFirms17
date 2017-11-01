@@ -1,0 +1,169 @@
+﻿@model BusinessLayer.MdlClasses.MdlAssociation
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    <style>
+        .form-control {
+            width: 400px;
+        }
+
+        .k-widget .k-multiselect .k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap {
+            width: 274px !important;
+        }
+
+        .k-multiselect.k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap li {
+            background-color: #efe2e2;
+        }
+
+        .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+    <h2>Association Info Update</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Select Organization</label>
+                    <div>
+                        <select class="form-control Org_ID" name="Org_ID" id="Org_ID" style="background:#fff">
+                            <option value="0">--Select Organization--</option>
+                            @foreach (var item in @Model.GetAllOrg_ID)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Association Title</label>
+                    <div>
+                        @Html.EditorFor(model => model.AssociationTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AssociationTitle, "", new { @class = "text-danger" })
+                        @*<select class="form-control RenewalReport_ID" name="RenewalReport_ID" id="RenewalReport_ID" style="background:#fff">
+                                <option value="0">--Select Renewal Report--</option>
+                            </select>*@
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">Association Date</label>
+                    <div>
+                        <input type="date" id="AssociationDate" name="AssociationDate" class="form-control" value="@Model.AssociationDate.ToString("yyyy-MM-dd")" />
+                        @Html.ValidationMessageFor(model => model.AssociationDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Expiry Date</label>
+                    <div>
+                        <input type="date" id="ExpiryDate" name="ExpiryDate" class="form-control" value="@Model.ExpiryDate.ToString("yyyy-MM-dd")" />
+                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">IsActive</label>
+                    <div>
+                        @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                        @*<input type="checkbox" id="IsActive" name="IsActive" class="form-control" value="@Model.IsActive" />*@
+                        @*@Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div> 
+
+            <input type="hidden" name="AssociationID" value="@Model.AssociationID" id="AssociationID" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="margin-top:10px">
+                        <input type="submit" id="UpdateAssociation" value="Update" class="btn btn-default" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                </div>
+
+            </div>
+        </div>    }
+    <script>
+        $("#UpdateAssociation").click(function () {
+            $("#AssociationTitle").removeClass("errorClass");
+            $("#AssociationDate").removeClass("errorClass");
+            $("#ExpiryDate").removeClass("errorClass");
+            var isErrorOccurd = true;
+            if ($.trim($("#AssociationTitle").val()) == "") {
+                $("#AssociationTitle").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#AssociationDate").val()) == "") {
+                $("#AssociationDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#ExpiryDate").val()) == "") {
+                $("#ExpiryDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+            return isErrorOccurd;
+        });
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}
+

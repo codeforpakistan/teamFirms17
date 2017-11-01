@@ -1,0 +1,155 @@
+﻿@model BusinessLayer.MdlClasses.MdlProject
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    <style>
+        .form-control {
+            width: 400px;
+        }
+
+        .k-widget .k-multiselect .k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap {
+            width: 274px !important;
+        }
+
+        .k-multiselect.k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap li {
+            background-color: #efe2e2;
+        }
+
+        .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+    <h2>Edit Project</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Select Organization</label>
+                    <div>
+                        <select class="form-control Org_ID" name="Org_ID" id="Org_ID" style="background:#fff">
+                            <option value="0">--Select Organization--</option>
+                            @foreach (var item in @Model.GetAllOrg_ID)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">ProjectTitle</label>
+                    <div>
+                        @Html.EditorFor(model => model.ProjectTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProjectTitle, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">Start Date</label>
+                    <div>
+                        <input type="date" id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Is Complete</label>
+                    <div>
+                        @Html.EditorFor(model => model.IsComplete, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IsComplete, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">IsActive</label>
+                    <div>
+                        @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                        @*<input type="checkbox" id="IsActive" name="IsActive" class="form-control" value="@Model.IsActive" />*@
+                        @*@Html.ValidationMessageFor(model => model.AssetValue, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+            <input type="hidden" name="FundSourceId" value="@Model.ProjectID" id="FundSourceId" />
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div style="margin-top:10px">
+                        <input type="submit" id="UpdateProject" value="Update" class="btn btn-default" />
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                </div>
+
+            </div>
+        </div>    }
+    <script>
+        $("#UpdateProject").click(function () {
+            $("#ProjectTitle").removeClass("errorClass");
+            $("#StartDate").removeClass("errorClass");
+            $("#TransferAmount").removeClass("errorClass");
+            $("#RcvYear").removeClass("errorClass");
+            var isErrorOccurd = true;
+            if ($.trim($("#ProjectTitle").val()) == "") {
+                $("#ProjectTitle").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#StartDate").val()) == "") {
+                $("#StartDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#IsComplete").val()) == "") {
+                $("#IsComplete").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            return isErrorOccurd;
+        });
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

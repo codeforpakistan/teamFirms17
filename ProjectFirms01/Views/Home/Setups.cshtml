@@ -1,0 +1,269 @@
+﻿@model BusinessLayer.MdlClasses.MdlDistrictandTehsils
+@{
+    ViewBag.Title = "Setups";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+ @section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    <ol class="breadcrumb">
+    <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li><a href="/Setups">Setups</a></li>
+    <li class="active">Setups</li>
+</ol>
+
+
+
+
+<div class="row">
+    <div class="col-sm-6">
+
+        <p>
+
+            <input type="button" id="CreateDistrict" value="Create District" class="btn btn-default" />
+        </p>
+
+
+        <table id="example" class="table table-striped table-bordered dataTable" cellspacing="0">
+            <thead>
+                <tr>
+
+                    <th>
+                        District ID
+                    </th>
+                    <th>
+                        District
+                    </th>
+
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DistrictList)
+                {
+
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DistrictID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DistrictName)
+                        </td>
+
+
+                        <td>
+                            <a style="cursor:pointer" onclick="EditDistrcit(@item.DistrictID)">Edit</a>
+
+
+
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+  
+
+    <div class="col-sm-6">
+
+        <p>
+
+            <input type="button" id="CreateTehsil" value="Create Tehsil" class="btn btn-default" />
+        </p>
+
+        <table id="example2" class="table  table-responsive  table-striped table-bordered dataTable" cellspacing="0">
+         
+            <thead>
+                <tr>
+
+                    <th>
+                        Tehsil ID
+                    </th>
+
+                    <th>
+                        District
+                    </th>
+                    <th>
+                        Tehsil
+                    </th>
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TehsilList)
+                {
+
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TehsilID)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DistrictName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TehsilName)
+                        </td>
+                        <td>
+                            <a style="cursor:pointer" onclick="EditTehsil(@item.TehsilID)">Edit</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+            </table>
+</div>
+    </div>
+
+<div class="modal fade" id="myModal1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div id="ModelContentArea1">
+
+    </div>
+</div>
+    <script>
+
+
+
+ 
+$(document).ready(function () {
+    $('#example').DataTable();
+    $('#example2').DataTable();
+});
+   
+        function EditDistrcit(e) {
+            var ID = e;
+            //   alert(ID);
+            //UpdateDistrictModle
+            $.ajax({
+                url: '/Home/UpdateDistrictModle',
+                type: 'GET',
+                data: { Id: ID },
+                success: function (data) {
+                    $('#myModal1').modal({ show: true });
+                    $("#ModelContentArea1").html("").append(data);
+                },
+                error: function () {
+                    //  toastr.error(data.message);
+                }
+            });
+        };
+
+
+        function EditTehsil(e) {
+            var ID = e;
+            //   alert(ID);
+            //UpdateDistrictModle
+            $.ajax({
+                url: '/Home/UpdateTeshilModle',
+                type: 'GET',
+                data: { Id: ID },
+                success: function (data) {
+                    $('#myModal1').modal({ show: true });
+                    $("#ModelContentArea1").html("").append(data);
+                },
+                error: function () {
+                    //  toastr.error(data.message);
+                }
+            });
+        };
+        $("#CreateDistrict").click(function () {
+
+            //  $('#myModal').modal({ show: true });
+            $.ajax({
+                url: '/Home/CreateDistrictModle',
+                type: 'GET',
+                success: function (data) {
+                    $('#myModal1').modal({ show: true });
+                    $("#ModelContentArea1").html("").append(data);
+                },
+                error: function () {
+                    //  toastr.error(data.message);
+                }
+            });
+        });
+
+
+        $("#CreateTehsil").click(function () {
+
+            //  $('#myModal').modal({ show: true });
+            $.ajax({
+                url: '/Home/CreateTehsilsModle',
+                type: 'GET',
+                success: function (data) {
+                    $('#myModal1').modal({ show: true });
+                    $("#ModelContentArea1").html("").append(data);
+                },
+                error: function () {
+                    //  toastr.error(data.message);
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+
+        //$('#btnCreateDistrict').click(function () {
+
+        // // alert("hi");
+        //    var DistName = $.trim($("#DistrictName").val());
+
+        //    if (DistName == "") {
+        //        $("#DistrictName").addClass('errorClass');
+        //        return false;
+        //    }
+        //    else {
+        //        //$("#issueCancel").trigger("click");
+
+        //        // alert(OrgDoc_ID);
+
+        //        $.ajax({
+        //            url: '/Home/CreateDistrict',
+        //            type: 'POST',
+        //            data: { DistName: DistName },
+        //            success: function (data) {
+
+        //                toastr.success(data.message);
+        //                $("#issueCancel").trigger("click");
+        //                location.reload();
+        //                // alert(data.name);
+        //            },
+        //            error: function (data) {
+
+        //                toastr.error(data.message);
+        //                //  alert("error");
+        //            }
+        //        });
+        //    };
+
+        //});
+    </script>
+
+
+
+}
+
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

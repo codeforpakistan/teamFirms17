@@ -1,0 +1,182 @@
+﻿<!-- Left side column. contains the logo and sidebar -->
+<style>
+    .user-panel > .info {
+        
+        font-size: 15px !important;
+       
+    }
+</style>
+<aside class="left-side sidebar-offcanvas" style="margin-top: -48px;margin-left: -21px">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <a href="/" class="logo">
+                    <img style="margin-left: 40px;" src="/Images/kp-logo.png" class="icon" />
+                </a>
+            </div>
+            <div class="pull-left info">
+                <p style="text-align: center; line-height: 10px;  ">GOVT OF <br><br>KHYBER PAKHTUNKHWA</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Administrator</a>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search..." />
+                <span class="input-group-btn">
+                    <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a href="/Home">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Login/SignOut">
+                    <i class="fa fa-th"></i> <span>Log Out</span> <small class="badge pull-right bg-green"></small>
+                </a>
+            </li>
+            <li>
+                <a href="/Login/UserList">
+                    <i class="fa fa-th"></i> <span>User List</span> <small class="badge pull-right bg-green"></small>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>Firms</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/Firm"><i class="fa fa-angle-double-right"></i>Firm List</a></li>
+                    <li><a href="/Firm/Create"><i class="fa fa-angle-double-right"></i>New Registration</a></li>
+                    <li><a href="/Addresss/Create?Flag=SideBar"><i class="fa fa-angle-double-right"></i>New Address</a></li>
+                    <li><a href="/Partner/Create?Flag=SideBar"><i class="fa fa-angle-double-right"></i>New Partner Information</a></li>
+                    <li><a href="/Witness/Create?Flag=SideBar"><i class="fa fa-angle-double-right"></i> New Witness Information</a></li>
+                 
+
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>Alteration Forms</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+
+                    <li><a href="/Firm/FormB"><i class="fa fa-angle-double-right"></i>Firm Name Alteration</a></li>
+                    <li><a href="/Addresss/AddressAlter"><i class="fa fa-angle-double-right"></i>Address  Alteration</a></li>
+                    <li><a href="/Firm/FormE"><i class="fa fa-angle-double-right"></i>FormE</a></li>
+                    <li><a href="/Firm/NewFormE"><i class="fa fa-angle-double-right"></i>NewFormE</a></li>
+                    <li><a href="/Partner/CreateNewFormD"><i class="fa fa-angle-double-right"></i>Form D</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Deeni Madaris</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/Madrassa"><i class="fa fa-angle-double-right"></i>Madrassa List</a></li>
+                    <li><a href="/Madrassa/Create"><i class="fa fa-angle-double-right"></i>New Madrassa Registration</a></li>
+                    <li><a href="/Addresss/CreateMadrassaAddress?Flag=SideBar"><i class="fa fa-angle-double-right"></i>New Address</a></li>
+                    <li><a href="/Partner/GoverningBody?Flag=SideBar"><i class="fa fa-angle-double-right"></i>New Governing Body</a></li>
+                    <li><a href="/Witness/CreateMadrassaWitness?Flag=SideBar"><i class="fa fa-angle-double-right"></i>Madrassa Witness</a></li>
+                    <li><a href="/Madrassa/Resolution"><i class="fa fa-angle-double-right"></i>Name Alteration </a></li>
+                    <li><a href="/Addresss/MadrassaAddressResolution"><i class="fa fa-angle-double-right"></i>Addresss Alteration </a></li>
+                    <li><a href="/Madrassa/GoverningBodyAlteration?Flag=SideBar"><i class="fa fa-angle-double-right"></i>Governing Body Alteration </a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i>
+                    <span>NGO / Society</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/SocietyNGO"><i class="fa fa-angle-double-right"></i>SocietyNGO List</a></li>
+                    <li><a href="/SocietyNGO/Create"><i class="fa fa-angle-double-right"></i>  New Society Registration</a></li>
+                    <li><a href="/Addresss/CreateSocietyAddress?Flag=SideBar"><i class="fa fa-angle-double-right"></i>NGO/Society  Address</a></li>
+                    <li><a href="/Partner/NGOGoverningBody?Flag=SideBar"><i class="fa fa-angle-double-right"></i>Governing Body</a></li>
+                    <li><a href="/Witness/CreateSocietyWitness?Flag=SideBar"><i class="fa fa-angle-double-right"></i>NGO/Society Witness</a></li>
+                    <li><a href="/SocietyNGO/Resolution"><i class="fa fa-angle-double-right"></i>Name Alteration </a></li>
+                    <li><a href="/Addresss/SocietyAddressResolution"><i class="fa fa-angle-double-right"></i>Addresss Alteration </a></li>
+                    <li><a href="/SocietyNGO/GoverningBodyAlteration?Flag=SideBar"><i class="fa fa-angle-double-right"></i>Governing Body Alteration </a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Reports</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/Report/RegOrgCount"><i class="fa fa-angle-double-right"></i>Count</a></li>
+                    <li><a href="/Report"><i class="fa fa-angle-double-right"></i> All Firms</a></li>
+                    <li><a href="/Report/PartnerInfo"><i class="fa fa-angle-double-right"></i> Partner List</a></li>
+                    <li><a href="/Report/SearchPartnerOrg"><i class="fa fa-angle-double-right"></i>Person In Org</a></li>
+                    <li><a href="/Report/FirmDetails"><i class="fa fa-angle-double-right"></i>Firm Details</a></li>
+                    <li><a href="/Report/SocietyNGODetails"><i class="fa fa-angle-double-right"></i>Society NGO Details</a></li>
+                    <li><a href="/Report/MadrassaDetails"><i class="fa fa-angle-double-right"></i>Madrassa Details</a></li>
+                    <li><a href="/Report/OrgRegBwDates"><i class="fa fa-angle-double-right"></i>Reg B/w Dates</a></li>
+
+
+
+
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>Info</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/RenewalReport/Create"><i class="fa fa-angle-double-right"></i>Renewal Report</a></li>
+                    <li><a href="/AuditReport/Create"><i class="fa fa-angle-double-right"></i>Audit Report</a></li>
+                    <li><a href="/BankAccount/Create"><i class="fa fa-angle-double-right"></i>Bank Account</a></li>
+                    <li><a href="/Association/Create"><i class="fa fa-angle-double-right"></i>Association</a></li>
+                    <li><a href="/Fund/Create"><i class="fa fa-angle-double-right"></i>Fund</a></li>
+                    <li><a href="/Staff/Create"><i class="fa fa-angle-double-right"></i>Staff</a></li>
+                    <li><a href="/Project/Create"><i class="fa fa-angle-double-right"></i>Project</a></li>
+                    <li><a href="/Asset/Create"><i class="fa fa-angle-double-right"></i>Asset</a></li>
+                </ul>
+            </li>         
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th"></i> <span>Setup Forms</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/Home/Setups"><i class="fa fa-angle-double-right"></i>Districts & Tehsils</a></li> 
+                     <li><a href="/OrgType/Index"><i class="fa fa-angle-double-right"></i>Organization Type</a></li>  
+                    <li><a href="/BusinessType/Index"><i class="fa fa-angle-double-right"></i>Add Business Type</a></li>
+                </ul>
+            </li>
+           
+
+            @*<li>
+                <a href="pages/calendar.html">
+                    <i class="fa fa-calendar"></i> <span>Calendar</span>
+                    <small class="badge pull-right bg-red">3</small>
+                </a>
+            </li>*@
+            @*<li>
+                <a href="pages/mailbox.html">
+                    <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                    <small class="badge pull-right bg-yellow">12</small>
+                </a>
+            </li>*@
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

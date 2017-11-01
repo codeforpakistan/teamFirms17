@@ -1,0 +1,477 @@
+﻿@model BusinessLayer.MdlClasses.MdlSocietyNGO
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+ 
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    @*<link href="~/Content/dd.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery.dd.js"></script>*@
+
+
+    <style>
+        .form-control {
+            width: 400px;
+        }
+
+
+
+        .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+    <h2>Add New Society/NGO</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">File #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.OrgRegNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrgRegNo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <label class="control-label ">Society Name  </label>
+                    <div>
+                        @Html.EditorFor(model => model.SocietyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NotaryLicense, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Form A Date</label>
+                    <div>
+                        <input type="date" id="FormADate" name="FormADate" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.FormADate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label class="control-label">Society/NGO Start Date</label>
+
+                    <div>
+                        <input type="date" id="SocietyStartDate" name="SocietyStartDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.SocietyStartDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Duration Of Society/NGO</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.DurationofFirm, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DurationofFirm, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label class="control-label">Memo Date</label>
+
+                    <div>
+                        <input type="date" id="MemoDate" name="MemoDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.MemoDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Execution Date</label>
+
+                    <div>
+                        <input type="date" id="ExecutionDate" name="ExecutionDate" class="form-control" />
+
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Challan Amount</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.ChallanAmount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChallanAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Challan #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.ChallanNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChallanNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">Fee Date</label>
+
+                    <div>
+                        <input type="date" id="FeeDate" name="FeeDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.FeeDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="control-label">Bank District</label>
+                    <div>
+                        <select class="form-control BankDistrict_ID" name="BankDistrict_ID" id="BankDistrict_ID" style="background:#fff">
+
+                            <option value="0">--Select Bank District--</option>
+
+                            @foreach (var item in @Model.BankDistrictList)
+                            {
+                                <option value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Select Bank</label>
+
+
+                    <div>
+                        <select class="form-control BankID" name="BankID" id="BankID" style="background:#fff">
+
+                            <option value="0">--Select Bank--</option>
+
+                            @foreach (var item in @Model.BanksList)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Notary Public Name</label>
+                    <div>
+                        @Html.EditorFor(model => model.NotaryPublicName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NotaryPublicName, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Notary Public License #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.NotaryLicense, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NotaryLicense, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">License Issue Date</label>
+
+                    <div>
+                        <input type="date" id="LicenseIssueDate" name="LicenseIssueDate" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.FormHIssueDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Issue #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.IssueNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IssueNo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Form H Issue Date</label>
+                    <div>
+                        <input type="date" id="FormHIssueDate" name="FormHIssueDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.FormHIssueDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <label class="control-label">Form G #</label>
+
+                    <div>
+                        <input type="text" id="FormGNo" name="FormGNo" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.FormGNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label ">Form A Submission Date</label>
+                    <div>
+                        <input type="date" id="SubmissionDate" name="SubmissionDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.SubmissionDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <label class="control-label">Society Type</label>
+                    <div>
+                        <select class="form-control SocietyType" name="SocietyType" id="SocietyType" style="background:#fff">
+
+                            <option value="0">--Select Society Type--</option>
+
+                            @foreach (var item in @Model.SocietyTypeDrp)
+                            {
+                            <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+
+                </div>
+            </div>
+
+            <div class="row">
+
+
+
+                <div class="col-sm-6">
+
+                    <label class="control-label">Objectives</label>
+
+                    <div>
+                        <textarea id="Objectives" name="Objectives" class="form-control"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.Objectives, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label class="control-label">Remarks</label>
+
+                    <div>
+                        <textarea id="Remarks" name="Remarks" class="form-control"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+
+                    <input type="submit" style="margin-top: 10px;" id="InsertSocietyNGO" value="Save" class="btn btn-default" />
+
+
+                </div>
+
+
+                <div class="col-sm-6">
+                </div>
+
+            </div>
+        </div>
+
+
+    }
+
+
+    <script>
+        //$('#OrgRegNo').focusin(function () {
+        //    $('#OrgRegNo').mask("9/999999");
+        //});
+
+
+        $("#InsertSocietyNGO").click(function () {
+            $("#NotaryLicense").removeClass("errorClass");
+            $("#OrgRegNo").removeClass("errorClass");
+            $("#IssueNo").removeClass("errorClass");
+            $("#DurationofFirm").removeClass("errorClass");
+            $("#ChallanNo").removeClass("errorClass");
+            $("#ChallanAmount").removeClass("errorClass");
+            $("#NotaryPublicName").removeClass("errorClass");
+            $("#NotaryLicense").removeClass("errorClass");
+            $("#FormADate").removeClass("errorClass");
+            $("#MemoDate").removeClass("errorClass");
+            $("#SubmissionDate").removeClass("errorClass");
+            $("#FeeDate").removeClass("errorClass");
+            $("#SocietyStartDate").removeClass("errorClass");
+            $("#FormHIssueDate").removeClass("errorClass");
+            $("#BusinessType_IDstring").removeClass("errorClass");
+            $("#BankDistrict_ID").removeClass("errorClass");
+            var isErrorOccurd = true;
+            if ($.trim($("#NotaryLicense").val()) == "") {
+                $("#NotaryLicense").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#OrgRegNo").val()) == "") {
+                $("#OrgRegNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#IssueNo").val()) == "") {
+                $("#IssueNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#DurationofFirm").val()) == "") {
+                $("#DurationofFirm").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+            if ($.trim($("#ChallanNo").val()) == "") {
+                $("#ChallanNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#ChallanAmount").val()) == "") {
+                $("#ChallanAmount").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+            if ($.trim($("#NotaryPublicName").val()) == "") {
+                $("#NotaryPublicName").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#NotaryLicense").val()) == "") {
+                $("#NotaryLicense").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FormADate").val()) == "") {
+                $("#FormADate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+            if ($.trim($("#MemoDate").val()) == "") {
+                $("#MemoDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#SubmissionDate").val()) == "") {
+                $("#SubmissionDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+
+            if ($.trim($("#SocietyStartDate").val()) == "") {
+                $("#SocietyStartDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FormHIssueDate").val()) == "") {
+                $("#FormHIssueDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FeeDate").val()) == "") {
+                $("#FeeDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+            if ($('#BankDistrict_ID option:selected').val() == 0) {
+
+                $("#BankDistrict_ID_title").addClass("errorClass");
+                isErrorOccurd = false;
+            }
+            $("#BankID").removeClass("errorClass");
+            if ($('#BankID option:selected').val() == 0) {
+                $("#BankID_title").addClass("errorClass");
+                // $("#BankID").addClass("errorClass");
+                isErrorOccurd = false;
+            }
+
+            return isErrorOccurd;
+        });
+
+        $(document).ready(function () {
+            $(".BankDistrict_ID").msDropDown();
+            $("#BankID").msDropDown();
+            $(".SocietyType").msDropDown();
+            $(".BankID").msDropDown();
+        });
+ 
+
+      
+
+      
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Index</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <style>
+        .errorClass {
+            border: 2px solid red;
+        }
+    </style>
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        .bg {
+            background: url(../images/10backimage.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        #MainForm{
+            opacity: 0.8;
+        }
+        .errorClass {
+            border: 2px solid red;
+        }
+        
+    </style>
+
+</head>
+<body class="bg">
+
+
+    @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { defaultbutton = "btnLogin",   id = "MainForm" }))
+    {
+
+
+        
+            <header>Login Here</header>
+            <div>
+                @if (@TempData["Status"] != null)
+                {
+                    <div id="NotificationBox" style="display: block;" class="alert alert-warning">
+                        <p id="msgbody" style="text-align: center; color: red;">@TempData["Status"]* </p>
+                    </div>
+                }
+               
+                 
+                <label>Username <span>*</span></label>
+                <input type="text" id="UserName" name="UserName" />
+                @*<div class="help">At least 6 character</div>*@
+                <label>Password <span>*</span></label>
+                <input type="password" name="Password" id="Password" />
+                @*<div class="help">Use upper and lowercase lettes as well</div>*@
+                <button id="btnLogin" type="submit">Login</button>
+            </div>
+       
+
+    }
+
+
+    <script>
+
+
+        $("#btnLogin").click(function () {
+
+            $("#UserName").removeClass("errorClass");
+            $("#Password").removeClass("errorClass");
+            var isErrorOccurd = true;
+            if ($.trim($("#UserName").val()) == "") {
+                $("#UserName").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#Password").val()) == "") {
+                $("#Password").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+            return isErrorOccurd;
+        });
+
+
+
+        setTimeout(function () {
+            $('#NotificationBox').fadeOut('fast');
+        }, 3000);
+
+    </script>
+</body>
+
+</html>

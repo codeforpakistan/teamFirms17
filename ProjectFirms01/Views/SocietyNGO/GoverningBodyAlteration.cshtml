@@ -1,0 +1,196 @@
+﻿@model BusinessLayer.MdlClasses.MdlPartner
+@{
+    ViewBag.Title = "GoverningBodyAlteration";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+    <style>
+        .form-control {
+            width: 400px;
+        }
+    </style>
+    @*@{
+            var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgIdSessionPartner(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgIdforpartner);
+        }
+
+        @if (sig != null)
+        {
+            <div style="float:right;margin-right:100px;">
+
+                <input type="button" id="UndoDeActivePartner" value="Undo deactivate Partner" class="btn btn-default" />
+
+                <input type="hidden" id="OrgDoc_ID" name="OrgDoc_ID" value="@sig.OrgDoc_ID" />
+
+            </div>
+        }
+        else
+        {
+            <div style="float:right;margin-right:100px;">
+
+                <input type="button" id="DeActivePartner" value="Deactivate Partner" class="btn btn-default" />
+
+
+
+            </div>
+        }*@
+
+    <h2>Governing Body Alteration</h2>
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label ">Society/File#</label>
+                    <div>
+                        <select class="form-control OrgId" name="OrgId" id="OrgId" style="background:#fff">
+
+                            <option value="0">--Select Society/File #--</option>
+
+                            @foreach (var item in @Model.GetAllOrgId)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                            }
+                        </select>
+
+                    </div>
+                    <input type="hidden" id="OrgName" name="OrgName" value="" />
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label ">Certificate Issue #</label>
+                    <div>
+                        <input type="text" id="NewFormHIssueNo" name="NewFormHIssueNo" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.NewFormHIssueNo, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <label class="control-label">Resolution Submission Date</label>
+                    <div>
+                        <input type="date" id="FormESubmissionDate" name="FormESubmissionDate" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.FormESubmissionDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="control-label">Certificate Issue Date</label>
+                    <div>
+
+                        <input type="date" id="NewFormHIssueDate" name="NewFormHIssueDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.NewFormHIssueDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div style="margin-top:10px">
+                        <input type="submit" id="InsertSocietyNGOGoverningBodyAlterationDetail" value="Save" class="btn btn-default" />
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    }
+
+
+
+
+    <div class="modal fade" id="Close_ProjectModal" role="dialog" tabindex="-1" aria-labelledby="purchaseLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="width: 40%; margin-top: 9% !important;">
+
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#363940;height:38px;padding:0px">
+                    <h4 class="modal-title" style="text-align:center; color:white">Alert</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Are you sure to deactivate current partner?</b>
+                </div>
+                <div class="modal-footer" style="height:48px;padding:6px 23px 0 0">
+                    <button type="button" id="btnConform" style="height:35px;width:80px;font-size:12px" class="k-button hide-on-narrow">Yes</button>
+                    <button type="button" id="btnCancalConform" style="height:35px;width:80px;font-size:12px" class="btn btn-danger">No</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $('#NewFormHIssueNo').focusin(function () {
+            $('#NewFormHIssueNo').mask("999999");
+        });
+        $('#btnCancalConform').click(function () {
+              $('#Close_ProjectModal').modal("hide")
+             $('#myModal').modal("show");
+        });
+
+
+
+
+
+
+        $('#InsertSocietyNGOGoverningBodyAlterationDetail').click(function () {
+            var OrgName = $('#OrgId option:selected').text();
+            $('#OrgName').val(OrgName);
+
+
+        });
+      
+
+       
+
+        $(document).ready(function () {
+            $(".OrgId").msDropDown();
+        });
+
+
+
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "NGOGoverningBodyList", "Partner")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

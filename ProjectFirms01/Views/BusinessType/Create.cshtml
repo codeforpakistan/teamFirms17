@@ -1,0 +1,135 @@
+﻿@model BusinessLayer.MdlClasses.MdlBusinessType
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    <style>
+        .form-control {
+            width: 400px;
+            
+        }
+         .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>MdlBusinessType</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-sm-6">
+
+                <label class="control-label">Select Organization Type</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="OrgTypeID" id="OrgTypeID" style="margin-left:-13px; background :#fff">
+                        <option value="0">--Select OrgType--</option>
+                        @foreach (var item in @Model.AllOrgTypes)
+                        {
+                            <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+
+                <label class="control-label">Business/Madrassa/NGO Type Name</label>
+
+                <div>
+                    @Html.EditorFor(model => model.BusinessTypeName, new { htmlAttributes = new { @class = "form-control" } })
+                  
+                </div>
+
+            </div>
+
+          
+        </div>
+      
+       
+
+        <div class="row">
+            <div class="col-sm-6">
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="submit" id="btnbussinesstype" value="Save" style="margin-top:10px;" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+
+
+
+    </div>
+
+
+    <script>
+
+
+        $("#btnbussinesstype").click(function () {
+        $("#OrgTypeID").removeClass("errorClass");
+        $("#BusinessTypeName").removeClass("errorClass");
+       
+       
+         
+        var isErrorOccurd = true;
+        if ($.trim($("#BusinessTypeName").val()) == "") {
+            $("#BusinessTypeName").addClass('errorClass');
+            isErrorOccurd = false;
+        }
+       
+ 
+  
+
+     
+     
+        if ($('#OrgTypeID option:selected').val() == 0) {
+
+            $("#OrgTypeID").addClass("errorClass");
+            isErrorOccurd = false;
+        }
+        
+        return isErrorOccurd;
+    });
+
+      
+     </script>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+ 
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

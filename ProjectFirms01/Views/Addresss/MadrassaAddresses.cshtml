@@ -1,0 +1,108 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlADDRESSS>
+@{
+    ViewBag.Title = "MadrassaAddresses";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+ @section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    <ol class="breadcrumb">
+        <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>       
+        <li><a href="/Madrassa">Madrassa</a></li>
+        <li class="active">Madrassa Address</li>
+    </ol>
+
+    <p>
+        @Html.ActionLink("Add Address", "CreateMadrassaAddress") /
+        @Html.ActionLink("Add Governing Body", "GoverningBody", "Partner") /
+        @Html.ActionLink("Add Witness", "CreateMadrassaWitness", "Witness")
+
+       
+    </p>
+<table id="example1" class="table table-responsive table-striped table-bordered">
+    <thead>
+        <tr>
+            
+            <th>
+                Org Name
+            </th>
+            <th>
+                Address Type
+
+            </th>
+            <th>
+                Adress Details
+            </th>
+            <th>
+                Tehsil
+            </th>
+            <th>
+                Enter By
+
+            </th>
+
+            <th>
+                Status
+            </th>
+           
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrgName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdressTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdressDetails)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TehsilName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td>
+                    <input type="checkbox" checked="@item.IsActive" />
+
+                  
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "UpdateMadrassaAddress", new { id = item.AdressID })
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

@@ -1,0 +1,293 @@
+﻿@model BusinessLayer.MdlClasses.MdlADDRESSS
+
+@{
+    ViewBag.Title = "Add Address";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    @{
+        var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgDocIdSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgDocId);
+
+    }
+
+    <style>
+        
+
+        .form-horizontal .control-label {
+            text-align: left;
+            width: 100%;
+        }
+    </style>
+
+    
+
+    <h2>Add New Address</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-horizontal col-sm-5" style="margin-left: 10px;">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @if (sig != null)
+                {
+                    <table style="margin-left: -17px;">
+                        <tr>
+                            <td>
+                                <label class="control-label col-md-2">Orgnization Name:</label>
+                            </td>
+                            <td style="padding-top: 8px;">
+                                <strong class="control-label">@sig.OrgName</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label col-md-2">File #:</label>
+                            </td>
+                            <td style="padding-top: 8px;">
+                                <strong class="control-label">@sig.OrgRegNo</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    
+
+                    <input type="hidden" value="@sig.OrgDocID" name="OrgDoc_ID" id="OrgDoc_ID" /> 
+                    
+                }
+
+
+                else
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Organization/File#</label>
+                        <div class="col-md-11">
+                            <select class="form-control OrgDoc_ID" name="OrgDoc_ID" id="OrgDoc_ID" style="background:#fff">
+
+                                <option value="0">--Select Organization/File #--</option>
+
+                                @foreach (var item in @Model.GetAllOrgDocId)
+                                {
+                                    <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="control-label col-md-2"> Address Type</label>
+                    <div class="col-md-11">
+                        <select class="form-control AdressType_ID" name="AdressType_ID" id="AdressType_ID" style="background:#fff">
+
+                            <option value="0">--Select AddressType--</option>
+
+                            @foreach (var item in @Model.AddressTypes)
+                            {
+                                <option value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" >Select District</label>
+                    <div class="col-md-11">
+                        <select class="form-control Distric_ID" name="Distric_ID" id="Distric_ID" style="background:#fff">
+
+                            <option value="0">--Select District--</option>
+
+                            @foreach (var item in @Model.DistricsDDL)
+                            {
+                                <option value="@item.Value">@item.Label</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Select Tehsil</label>
+                    <div class="col-md-11">
+                        <select class="form-control Tehsil_ID" name="Tehsil_ID" id="Tehsil_ID" style="background:#fff">
+
+                            <option value="0">--Select Tehsil--</option>
+
+                            @*@foreach (var item in @Model.TehsilDDL)
+                                {
+                                    <option value="@item.Value">@item.Label</option>
+                                }*@
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Address Detail</label>
+                
+                    <div class="col-md-11">
+                        <textarea id="AdressDetails" name="AdressDetails" class="form-control"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.AdressDetails, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-11">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6" style="margin-top: 62px;">
+                <div id="OrgAddressList">
+
+
+                </div>
+            </div>
+        </div>
+        
+          <input type="hidden" id="TehsilHiddenId"  value="@Model.Tehsil_ID"/>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+
+    <script type="text/javascript">
+
+
+
+
+
+
+
+
+
+        //$('#Distric_ID').change(function (e) {
+        //    alert("hi");
+
+        //});
+
+        $(document).ready(function () {
+
+            $(".Distric_ID").msDropDown();
+            $(".OrgDoc_ID").msDropDown();
+            $(".AdressType_ID").msDropDown();
+            //   $(".Tehsil_ID").msDropDown();
+
+         //   $('#Distric_ID').trigger('change');
+
+
+        });
+
+        $('#Distric_ID').change(function () {
+
+            var ID = $(this).val();// $('#Distric_ID option:selected').val();
+            var tehsilID = $('#TehsilHiddenId').val();
+            $("#Tehsil_ID").empty();
+            $("#Tehsil_ID").append("<option value=" + '0' + "> --Select Tehsil-- </option>");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetTehsils", "Addresss")',
+                data: { ID: ID, Tehsil: tehsilID },
+
+                success: function (d) {
+
+                    for (i = 0; i < d.length; i++) {
+                        var html = "";
+                        var id = d[i].Value;
+                        var city = d[i].Label;
+
+                        //  console.log(id +''+ city);
+                        html += '<option value="' + id + '">' + city + '</option>';
+                        $("#Tehsil_ID").append(html);
+
+                    }
+                    // $(".Tehsil_ID").msDropDown();
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+        GetAddressList();
+        function GetAddressList() {
+            // alert("HI");
+            //  return false;
+            var ID
+            if ($('#OrgDoc_ID option:selected').val() == undefined) {
+                ID = $.trim($('#OrgDoc_ID').val());
+            }
+            else {
+                ID = $('#OrgDoc_ID option:selected').val();
+            }
+            $.ajax({
+                url: '/Addresss/ListOfAddress',
+                type: 'GET',
+                dataType: "html",
+                data: { Id: ID },
+                success: function (data) {
+                    $("#OrgAddressList").html("").append(data);
+
+                },
+                error: function () {
+                    // toastr.error(data.message);
+                }
+            });
+        }
+
+        //$('#AssigneeId option:selected').val();
+        $('#OrgDoc_ID').on('change', function () {
+            GetAddressList();
+
+        });
+
+
+
+        //$(document).ready(function () {
+        //    $("#Distric_ID").change(function () {
+        //        var dID = $(this).val();
+
+        //        //$.ajax({
+        //        //    url: '/Addresss/GetTehsils',
+        //        //    type: 'GET',
+        //        //    data: { id: dID },
+        //        //    dataType: "json",
+        //        ////   traditional: true,
+        //        ////   contentType: "application/json; charset=utf-8",
+        //        //    success: function (data) {
+        //        //        console.log(data);
+        //        //    },
+        //        //    error: function () {
+
+        //        //    }
+        //        //});
+
+
+
+        //    });
+        //});
+
+    </script>
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

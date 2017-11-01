@@ -1,0 +1,160 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlFirm>
+
+@{
+    ViewBag.Title = "Firm";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+    
+}
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+ 
+   <style>
+       table.table-fixedheader {
+    width: 100%;   
+}
+    </style>
+        <ol class="breadcrumb">
+            <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>           
+            <li class="active">Firm</li>
+        </ol>
+
+    <p>
+        @Html.ActionLink("Add New Firm", "Create")
+    </p>
+        
+         
+                <div class="row">
+                    <div class="col-sm-12" >
+                        <table id="example1" style="width:100%;" class="table table-striped table-responsive table-fixedheader  table-bordered dataTable">
+                            <thead>
+                                <tr>
+                                  
+                                    <th>
+                                        Org Name
+                                       
+
+                                    </th>
+                                    <th>
+                                      File #
+                                    </th>
+                                    <th>
+                                        Firm Duration 
+                                    </th>
+                                    <th>
+                                      Form A Date
+                                    </th>
+                                   
+                                    <th>
+                                       Form G #
+                                    </th>
+                                    <th>
+                                      Firm Start Date
+                                    </th>
+
+
+                                    <th>
+                                        Notary Public Name
+                                    </th>
+                                    <th>
+                                        Notary Public License #
+                                    </th>
+                                    <th>
+                                        Deed Agreement Date
+                                    </th>
+
+
+                                    <th>
+                                        Issue #
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                       
+                                        <td>
+                                            @Html.ActionLink(item.OrgName, "Details", new { id = item.OrgRegNo.Replace("/","-") })
+                                            @*@Html.DisplayFor(modelItem => item.OrgName)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrgRegNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DurationofFirm)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FormADateString)
+                                        </td>
+                                         
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FormGNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirmStartDateString)
+                                        </td>
+
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NotaryPublicName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NotaryPublicLicenseNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DeedAgreementDateString)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IssueNo)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.OrganizationID })
+
+                                        </td>
+
+                                    </tr>
+
+                                }
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                </div>
+
+        
+ 
+}
+
+
+
+
+@section FooterArea{
+
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}
+
+
+
+
+
+
+
+

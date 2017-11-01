@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Madrassa Details";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+
+<h2>Search Madrassa Details</h2>
+<iframe id="myReport" width="1024" height="800" src="~/Reports/RptMadrassaDetails.aspx"></iframe>
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

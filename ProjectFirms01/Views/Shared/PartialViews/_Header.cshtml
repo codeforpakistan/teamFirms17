@@ -1,0 +1,56 @@
+﻿
+<div>
+    @{
+        var sig = BusinessLayer.MdlClasses.UtilityClass.GetUserSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.UserSessions);
+
+    }
+
+    <div class="navbar navbar-static-top" role="navigation" style="height:110px;">
+
+        <div class="navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                   
+                  
+                    @if (sig != null)
+                    {
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@sig.UserName<span class="caret"></span></a>
+                    }
+                    else
+                    {
+                        <a href="/Login" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Please Login<span class="caret"></span></a>
+                    }
+                                                                                                                                                                                    
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/Login/UserList">Registration</a>
+                        </li>
+
+                        <li>
+                            <a href="/Login/SignOut">Logout</a>
+                        </li>
+                        @*  <li>
+                                <a href="#">Something else here</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">Separated link</a>
+                            </li>
+                            <li>
+                                <form>
+                                    <button type="submit" class="btn btn-link btn-logout">Logout</button>
+                                </form>
+                            </li>*@
+                    </ul>
+                </li>
+            </ul>
+            <h1 class="headingtop" style="width: 144%;    float: left;    font-weight: bold;    text-shadow: 1px 2px black;    margin-right: 74px;    margin-top: -20px;    letter-spacing: 0px;    color: white;    word-spacing: 2px;    font-size: 41px;">
+                DIRECTORATE OF INDUSTRIES & COMMERCE
+
+            </h1>
+
+        </div>
+
+    </div>
+</div>

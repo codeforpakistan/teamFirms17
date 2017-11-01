@@ -1,0 +1,599 @@
+﻿@model BusinessLayer.MdlClasses.MdlFirm
+
+@{
+    ViewBag.Title = "Create Firm";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    
+
+
+    <style>
+     
+
+        .form-control {
+            width: 400px;
+        }
+
+        .k-widget .k-multiselect .k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap {
+            width: 274px !important;
+        }
+
+        .k-multiselect.k-header {
+            width: 274px !important;
+        }
+
+        .k-multiselect-wrap li {
+            background-color: #eeeeee;
+            color: black;
+        }
+
+        .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+    <h2>Add New Firm</h2> 
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-sm-6">
+
+                <label class="control-label">File #</label>
+
+                <div>
+                    @Html.EditorFor(model => model.OrgRegNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OrgRegNo, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="col-sm-6">
+                <label class="control-label ">Firm Name</label>
+                <div>
+                    @Html.EditorFor(model => model.OrgName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OrgName, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Form A Date</label>
+                <div>
+                    <input type="date" id="FormADate" name="FormADate" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.FormADate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label class="control-label">Firm Start Date/Carring Bussiness</label>
+
+                <div>
+                    <input type="date" id="FirmStartDate" name="FirmStartDate" class="form-control" />
+
+                    @Html.ValidationMessageFor(model => model.FirmStartDate, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Duration Of Firm</label>
+
+                <div>
+                    @Html.EditorFor(model => model.DurationofFirm, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DurationofFirm, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label class="control-label">Deed Agreement Date/PC Date</label>
+
+                <div>
+                    <input type="date" id="DeedAgreementDate" name="DeedAgreementDate" class="form-control" />
+
+                    @Html.ValidationMessageFor(model => model.DeedAgreementDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Execution Date</label>
+               
+                <div>
+                    <input type="date" id="ExecutionDate" name="ExecutionDate" class="form-control" />
+                    
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Challan Amount</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.ChallanAmount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChallanAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Challan #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.ChallanNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChallanNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+              
+                <label class="control-label">Fee Date</label>
+
+                <div>
+                    <input type="date" id="FeeDate" name="FeeDate" class="form-control" />
+
+                    @Html.ValidationMessageFor(model => model.FeeDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-sm-6">
+               
+                <label class="control-label">Bank District</label>
+                <div>
+                    <select class="form-control BankDistrict_ID" name="BankDistrict_ID" id="BankDistrict_ID" style="background:#fff">
+
+                        <option value="0">--Select Bank District--</option>
+
+                        @foreach (var item in @Model.BankDistrictList)
+                        {
+                            <option value="@item.Value">@item.Label</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Select Bank</label>
+                <div>
+                    <select class="form-control" name="BankID" id="BankID" style="background:#fff">
+
+                        <option value="0">--Select Bank--</option>
+                        @foreach (var item in @Model.GetAllBankList)
+                        {
+                            <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                        }
+                        @*<option value="1">State Bank</option>
+                        <option value="2">National Bank</option>*@
+
+                    </select>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">
+              
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Notary Public Name</label>
+                <div>
+                    @Html.EditorFor(model => model.NotaryPublicName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NotaryPublicName, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">Notary PublicLicense #</label>
+               
+                <div>
+                    @Html.EditorFor(model => model.NotaryPublicLicenseNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NotaryPublicLicenseNo, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <label class="control-label">License Issue Date</label>
+              
+                <div>
+                    <input type="date" id="LicenseIssueDate" name="LicenseIssueDate" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.FormHIssueDate, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+              
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Issue #</label>
+
+                    <div>
+                        @Html.EditorFor(model => model.IssueNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IssueNo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Form H Issue Date</label>
+                    <div>
+                        <input type="date" id="FormHIssueDate" name="FormHIssueDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.FormHIssueDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        <div class="row">
+           
+            <div class="col-sm-6">
+                <label class="control-label">Form G #</label>
+
+                <div>
+                    <input type="text" id="FormGNo" name="FormGNo" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.FormGNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label ">Form A Submission Date</label>
+                <div>
+                    <input type="date" id="SubmissionDate" name="SubmissionDate" class="form-control" />
+
+                    @Html.ValidationMessageFor(model => model.SubmissionDate, "", new { @class = "text-danger" })
+                </div>
+               
+</div>
+        </div>
+
+
+       
+         
+
+         
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label class="control-label">Remarks</label>
+
+                <div>
+                    <textarea id="Remarks" name="Remarks" class="form-control"></textarea>
+
+                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+
+            </div>
+        </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <label class="control-label ">Business Type</label>
+                    <div id="BusinessType_IDstringdiv">
+                        <input type="text" id="BusinessType_IDstring" style="display:none" name="BusinessType_IDstring" />
+                        <select id="Hiddenfield" multiple="multiple" name="Hiddenfield" />
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+              
+                <input type="submit" style="margin-top: 10px;" id="InsertFirmDetail" value="Save" class="btn btn-default" />
+              
+ 
+
+            </div>
+
+
+            <div class="col-sm-6">
+            </div>
+
+        </div>
+    </div>
+        
+
+    }
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                // Find any date inputs and override their functionality
+                $('input[type="date"]').datepicker();
+            });
+        </script>*@
+
+    <script>
+        //$('#OrgRegNo').focusin(function () {
+        //    $('#OrgRegNo').mask("9/99999");
+        //});
+        //$(document).ready(function () {
+        //    $('input[type="date"]').kendoDatePicker({
+        //    value: new Date(),
+        //    min: new Date(new Date() - 1),
+        //    height:22,
+        //    //format: "yyyy-MM-dd  h:mm:ss tt"
+        //    format: "yyyy-MM-dd"
+        //});
+
+        //    $('input[type="date"]').attr('readonly', true);
+        //});
+
+
+      
+      
+
+        $("#InsertFirmDetail12").click(function () {
+            CompareDate();
+        });
+
+        $("#InsertFirmDetail").click(function () {
+            $("#OrgName").removeClass("errorClass");
+            $("#OrgRegNo").removeClass("errorClass");
+            $("#IssueNo").removeClass("errorClass");
+            $("#DurationofFirm").removeClass("errorClass");
+            $("#ChallanNo").removeClass("errorClass");
+            $("#ChallanAmount").removeClass("errorClass");
+            $("#NotaryPublicName").removeClass("errorClass");
+            $("#NotaryPublicLicenseNo").removeClass("errorClass");
+            $("#FormADate").removeClass("errorClass");
+            $("#DeedAgreementDate").removeClass("errorClass");
+            $("#ExecutionDate").removeClass("errorClass");
+            $("#SubmissionDate").removeClass("errorClass");
+            $("#FeeDate").removeClass("errorClass");
+            $("#FirmStartDate").removeClass("errorClass");
+            $("#FormHIssueDate").removeClass("errorClass");
+            $("#BusinessType_IDstring").removeClass("errorClass");
+            $("#BankDistrict_ID").removeClass("errorClass");
+           
+            var isErrorOccurd = true;
+            if ($.trim($("#OrgName").val()) == "") {
+                $("#OrgName").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#OrgRegNo").val()) == "") {
+                $("#OrgRegNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#IssueNo").val()) == "") {
+                $("#IssueNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#DurationofFirm").val()) == "") {
+                $("#DurationofFirm").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+            if ($.trim($("#ChallanNo").val()) == "") {
+                $("#ChallanNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#ChallanAmount").val()) == "") {
+                $("#ChallanAmount").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+            if ($.trim($("#NotaryPublicName").val()) == "") {
+                $("#NotaryPublicName").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#NotaryPublicLicenseNo").val()) == "") {
+                $("#NotaryPublicLicenseNo").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FormADate").val()) == "") {
+                $("#FormADate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+
+            if ($.trim($("#DeedAgreementDate").val()) == "") {
+                $("#DeedAgreementDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+            if ($.trim($("#ExecutionDate").val()) == "") {
+                $("#ExecutionDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+            var dateOne = $.trim($("#DeedAgreementDate").val()); // new Date(2010, 00, 15); //Year, Month, Date
+            var dateTwo = $.trim($("#ExecutionDate").val());
+
+            if (dateOne > dateTwo) {
+                $("#DeedAgreementDate").addClass('errorClass');
+                $("#ExecutionDate").addClass('errorClass');
+                toastr.error("Execution date  is prior to deed agreement date.");
+                isErrorOccurd = false;
+
+            }
+            //else {
+            //    toastr.success("Deed Agreement Date is greather then Execution Date.");
+            //}
+
+            if ($.trim($("#SubmissionDate").val()) == "") {
+                $("#SubmissionDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+
+
+
+            if ($.trim($("#FirmStartDate").val()) == "") {
+                $("#FirmStartDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FormHIssueDate").val()) == "") {
+                $("#FormHIssueDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }
+            if ($.trim($("#FeeDate").val()) == "") {
+                $("#FeeDate").addClass('errorClass');
+                isErrorOccurd = false;
+            }          
+
+            if ($('#BankDistrict_ID option:selected').val() == 0) {
+
+                $("#BankDistrict_ID_title").addClass("errorClass");
+                isErrorOccurd = false;
+            }
+            $("#BankID").removeClass("errorClass");
+            if ($('#BankID option:selected').val() == 0) {
+                $("#BankID_title").addClass("errorClass");
+               // $("#BankID").addClass("errorClass");
+                isErrorOccurd = false;
+            }
+            return isErrorOccurd;
+        });
+
+        $(document).ready(function () {
+
+
+            $(".BankDistrict_ID").msDropDown();
+
+            $("#BankID").msDropDown();
+
+
+
+        });
+
+        //  $(document).ready(function () {
+        // alert("hi");
+        $("#Hiddenfield").change(function () {
+            var multiselectBusiness = $("#Hiddenfield").data("kendoMultiSelect").value();
+            //   console.log(multiselectBusiness);
+            //  var selectedData = [];
+
+            //  var multiSelectValueEmp = $("#BusinessType_ID").data("kendoMultiSelect").value(); //Get KendoMulitSelect all selected values
+            //  console.log(multiSelectValueEmp);
+            //$.each(multiSelectValueEmp, function (index, value) {
+            //    // console.log(value);
+            //    AssigneeIdsArray.push(value);
+            //});
+
+        });
+
+
+        $("#Hiddenfield").kendoMultiSelect({
+            filter: "startswith",
+            dataTextField: "Label",
+            dataValueField: "Value",
+
+            dataSource: {
+                //   type: "GET",
+                dataType: "json",
+                traditional: true,
+                asyn: true,
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "/Firm/GETBussinessTypeinDD",
+                        //complete: function () {
+                        //    $("#BusinessType_ID").data("kendoDropDownList").select(-1);
+                        //}
+                    },
+
+                }
+            }
+        });
+
+
+        $('body').on('click', '#InsertFirmDetail', function () {
+            var multiSelect = $("#Hiddenfield").data("kendoMultiSelect").value();
+
+            if (multiSelect != "" || multiSelect != null) {
+                $("#BusinessType_IDstring").val(multiSelect);
+
+                // $(".k-multiselect-wrap .k-floatwrap").css("border", "2px solid red");
+
+            }
+
+            //   var selectedBusinessData = [];
+
+            // var abc = $("#TEST1").data("kendoDropDownList").value()
+            //var multiSelect = $("#BusinessType_IDstring").data("kendoMultiSelect").value();
+            //   var val = multiSelect.value().slice();
+            // alert(multiSelect);
+            // var multiselect=$("#TEST1").data("kendoMultiSelect").value([]);
+            // var multiselect = $('#TEST1').data("kendoMultiSelect").value();
+            //$.each(multiselect, function (index, value) {
+            //    //console.log(1);
+            //    selectedData.push(value);
+            //    //console.log(selectedData);
+            //});
+            // alert(multiselect);
+        });
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

@@ -1,0 +1,310 @@
+﻿@model BusinessLayer.MdlClasses.MdlPartner
+
+@{
+    ViewBag.Title = "Create";
+ Layout = "~/Views/Shared/_FirmLayout.cshtml";
+ 
+ }
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+@{
+    var sig = BusinessLayer.MdlClasses.UtilityClass.GetOrgDocIdSession(BusinessLayer.MdlClasses.UtilityClass.UserSession.OrgDocId);
+
+}
+
+<style>
+    /*.form-control {
+        width: 400px;
+    }*/
+
+    .form-horizontal .control-label {
+    text-align: left;
+    width: 100%;
+}
+</style>
+
+ 
+ 
+<h2>Add  Partner</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="form-horizontal col-sm-5">
+         
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           @if (sig != null)
+           {
+               
+                <table style="margin-left: -17px;">
+                        <tr>
+                            <td>
+                                <label class="control-label col-md-2">Orgnization Name:</label>
+                            </td>
+                            <td style="padding-top: 8px;">
+                                <strong class="control-label">@sig.OrgName</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label col-md-2">File #:</label>
+                            </td>
+                            <td style="padding-top: 8px;">
+                                <strong class="control-label">@sig.OrgRegNo</strong>
+                            </td>
+                        </tr>
+                    </table>
+            @*<div class="form-group">
+                <label style="width:143px;" class="control-label col-md-2">Orgnization Name:</label>
+                <div style="margin: 7px;">
+                    <strong class="form-label">@sig.OrgName</strong>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label style="margin-left: -44px;" class="control-label col-md-2">File #:</label>
+                <div style="margin: 7px;">
+                    <strong class="form-label">@sig.OrgRegNo</strong>
+                </div>
+            </div>*@
+                  <input type="hidden" value="@sig.OrgDocID" name="OrgDoc_ID" id="OrgDoc_ID" />
+            
+           }
+
+
+
+           else
+           {
+                <div class="form-group">
+                    <label class="control-label col-md-2"> Organization/File#</label>
+                    <div class="col-md-11">
+                        <select class="form-control OrgDoc_ID" name="OrgDoc_ID" id="OrgDoc_ID" style="background:#fff">
+
+                            <option value="0">--Select Organization/File #--</option>
+
+                            @foreach (var item in @Model.GetAllOrgDocId)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
+        
+
+
+        
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Partner Name</label>
+              
+                <div class="col-md-11">
+                    @Html.EditorFor(model => model.PartnerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PartnerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"> Nationality</label>
+                <div class="col-md-11">
+                    <select class="form-control " id='NationalityID' name="NationalityID" style="background:#fff">
+
+                        <option value="0">Nationality</option>
+                        <option value="1">Pakistani</option>
+                        <option value="2">Foreginer</option>
+                    </select>
+                </div>
+            </div>
+            <div style='display:none;' id='foreginer'>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Citizen #</label>
+               
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerCitizenNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerCitizenNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Passport #</label>
+                
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerPassportNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerPassportNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div style='display:none;' id='national'>
+
+                <div class="form-group">
+
+                    <label class="control-label col-md-2">Partner CNIC</label>
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerCNIC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerCNIC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner ONIC</label>
+                   
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerONIC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerONIC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Share</label>
+                 
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerShare, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerShare, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Address</label>
+              
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Contact #</label>
+                   
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Partner Mobile #</label>
+                  
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.PartnerMobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PartnerMobileNo, "", new { @class = "text-danger" })
+                    </div>
+                </div> 
+         
+                <div class="form-group">
+                    <div class="col-md-11">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        <div class="col-sm-6" style="margin-top: 62px;">
+            <div id="OrgPartnerList">
+
+                @*@Html.Partial("~/Views/Partner/PartialViews/_OrgPartnerList.cshtml")*@
+            </div>
+        </div>
+    </div>
+}
+
+
+   
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+ <script>
+
+     $('#PartnerCNIC').focusin(function () {
+         $('#PartnerCNIC').mask("99999-9999999-9");
+     });
+     $('#PartnerContactNo').focusin(function () {
+         $('#PartnerContactNo').mask("9999-9999999");
+     });
+     
+     $('#PartnerMobileNo').focusin(function () {
+         $('#PartnerMobileNo').mask("9999-9999999");
+     });
+     $(document).ready(function () {
+         $(".Designation_ID").msDropDown();
+         $(".OrgDoc_ID").msDropDown();
+
+         $('#NationalityID').on('change', function () {
+
+             if (this.value == '1')
+                 //.....................^.......
+             {
+                 $("#national").show();
+             }
+             else if(this.value=='2') {
+                 $("#foreginer").show();
+             }
+             else if(this.value=='0') {
+                 $("#national").hide();
+                 $("#foreginer").hide();
+             }
+         });
+     });
+
+
+     GetPartnerList();
+
+     function GetPartnerList()
+     {
+        // alert("HI");
+       //  return false;
+         var ID
+         if ($('#OrgDoc_ID option:selected').val() == undefined) {
+             ID = $.trim($('#OrgDoc_ID').val());
+         }
+         else {
+             ID = $('#OrgDoc_ID option:selected').val();
+         }
+         $.ajax({
+             url: '/Partner/ListOfPartner',
+             type: 'GET',
+             dataType: "html",
+             data: { Id: ID },
+             success: function (data) {
+                 $("#OrgPartnerList").html("").append(data);
+
+             },
+             error: function () {
+                 // toastr.error(data.message);
+             }
+         });
+     }
+
+     //$('#AssigneeId option:selected').val();
+     $('#OrgDoc_ID').on('change', function () {
+         GetPartnerList();
+       
+     });
+
+
+
+     
+
+ </script>
+
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

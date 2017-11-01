@@ -1,0 +1,137 @@
+﻿
+@model BusinessLayer.MdlClasses.MdlDistrictandTehsils
+
+<link href="~/Content/dd.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dd.js"></script>
+
+
+ 
+   
+    <style>
+ .dd .ddArrow {
+            background-image: url(../images/ESSarrow.png);
+        }
+     .form-control {
+        width: 400px;
+    }
+
+    .errorClass {
+        border: 2px solid red;
+    }
+</style>
+
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <input type="hidden" id="TehsilID" value="@Model.TehsilID" />
+            @if (Model.TehsilID != 0)
+            {
+                <h4 class="modal-title"> Update   Tehsil</h4>
+            }
+            else
+            {
+                <h4 class="modal-title"> Create Tehsil</h4>
+            }
+
+
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <label class="control-label">Select District</label>
+                    <select class="form-control DistrictID" name="DistrictID" id="DistrictID" style="background:#fff">
+
+                        <option value="0">--Select District--</option>
+
+                        @foreach (var item in @Model.GetAllDistrictsDrp)
+                        {
+                            <option selected="@item.Selected" value="@item.Value">@item.Label</option>
+                        }
+                    </select>
+               
+
+                    <label class="control-label">Tehsil Name</label>
+                    <div>
+                        <input type="text" id="TehsilName" value="@Model.TehsilName" placeholder="Enter Tehsil Name" name="TehsilName" class="form-control" />
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+            @if (Model.TehsilID != 0)
+            {
+                <button type="button" id="btnCreateTehsilID" style="height:35px;width:80px;font-size:12px" class="btn-save">Update</button>
+
+            }
+            else
+            {
+                <button type="button" id="btnCreateTehsilID" style="height:35px;width:80px;font-size:12px" class="btn-save">Save</button>
+
+            }
+
+
+            <button type="button" id="issueCancel" style="height:35px;width:80px;font-size:12px" class="btn-cancel" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+
+    $('#btnCreateTehsilID').click(function () {
+        var TehsilID = $.trim($("#TehsilID").val());
+        var TehsilName = $.trim($("#TehsilName").val());
+        var DistrictID = $('#DistrictID option:selected').val();
+
+        if (TehsilName == "") {
+            $("#TehsilName").addClass('errorClass');
+            return false;
+        }
+        if (DistrictID == 0) {
+            $("#DistrictID").addClass("errorClass");
+            return false;
+        }
+        else {
+            //$("#issueCancel").trigger("click");
+
+            // alert(OrgDoc_ID);
+
+            $.ajax({
+                url: '/Home/CreateTehsil',
+                type: 'POST',
+                data: { TehsilName: TehsilName, DistrictID: DistrictID, TehsilID: TehsilID },
+                success: function (data) {
+
+                    toastr.success(data.message);
+                    $("#issueCancel").trigger("click");
+                    location.reload();
+                    // alert(data.name);
+                },
+                error: function (data) {
+
+                    toastr.error(data.message);
+                    //  alert("error");
+                }
+            });
+        };
+
+    });
+</script>
+
+
+
+
+
+

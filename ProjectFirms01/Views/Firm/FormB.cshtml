@@ -1,0 +1,173 @@
+﻿@model BusinessLayer.MdlClasses.MdlFirm
+@{
+    ViewBag.Title = "FormB";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+    @*<link href="~/Content/dd.css" rel="stylesheet" /> 
+    <script src="~/Scripts/jquery.dd.js"></script>*@ 
+    <style>
+        /*.dd .ddArrow {
+            background-image: url(../images/ESSarrow.png);
+        }*/
+
+        .form-control {
+            width: 400px;
+        }
+
+
+        .form-horizontal {
+            margin-left: 40px;
+        }
+    </style>
+    <h2>Firm Name Alteration</h2>
+
+
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label ">Organization/File#</label>
+                    <div>
+                        <select class="form-control OrgID" name="OrgID" id="OrgID" style="background:#fff">
+
+                            <option value="0">--Select Organization/File #--</option>
+
+                            @foreach (var item in @Model.GetAllOrgDocId)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Label - @item.OptionalLabel</option>
+                            }
+                        </select>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label ">Firm New Name</label>
+                    <div>
+                        @Html.EditorFor(model => model.OrgRegName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrgRegName, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+          
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <label class="control-label">Form B Submission Date</label>
+                    <div>
+
+                        <input type="date" id="FormBSubmissionDate" name="FormBSubmissionDate" class="form-control" />
+                       
+                        @Html.ValidationMessageFor(model => model.FormBSubmissionDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div><div class="col-sm-6">
+                          <label class="control-label ">New Form H IssueNo</label>
+                          
+                          <div>
+                              @Html.EditorFor(model => model.NewFormHIssueNo, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.NewFormHIssueNo, "", new { @class = "text-danger" })
+                          </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <label class="control-label">New Form H Issue Date</label>
+                    <div>
+
+                        <input type="date" id="NewFormHIssueDate" name="NewFormHIssueDate" class="form-control" />
+
+                        @Html.ValidationMessageFor(model => model.NewFormHIssueDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                   
+                </div>
+            </div>
+
+           
+             
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Remarks</label>
+
+                    <div>
+                        <textarea id="Remarks" name="Remarks" class="form-control"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+             
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div style="margin-top:10px">
+                        <input type="submit" id="InsertFirmNewFormHDetail" value="Save" class="btn btn-default" />
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-6">
+                </div>
+
+            </div>
+        </div>
+
+    }
+    <script>
+
+        $(document).ready(function () {
+            $(".OrgID").msDropDown();
+        });      
+
+        
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}
+

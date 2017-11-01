@@ -1,0 +1,85 @@
+﻿@model BusinessLayer.MdlClasses.MdlDocument
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+
+
+    <style>
+        .form-control {
+            width: 400px;
+        }
+    </style>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MdlDocument</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentName)
+        </dd>
+
+       
+
+     
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnteredByUser_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnteredByUser_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryTime)
+        </dd>  
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+    <input type="hidden" id="DocumentID" name="DocumentID" value="@Model.DocumentID" />
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

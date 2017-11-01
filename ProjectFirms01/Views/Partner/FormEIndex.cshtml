@@ -1,0 +1,144 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlPartner>
+@{
+    ViewBag.Title = "FormEIndex";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+ 
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+    <ol class="breadcrumb">
+        <li><a href="/Firm"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Partner</li>
+    </ol>
+    <p>
+        @Html.ActionLink("Add New Form E Partner", "FormEPartner") 
+        @*/ @Html.ActionLink("Add Witness", "Create", "Witness")*@
+    </p>
+    <table id="example1" class="table table-responsive table-striped table-bordered">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerCNIC)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.PartnerONIC)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerShare)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerContactNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerMobileNo)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.PartnerCitizenNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerPassportNo)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.OrgDoc_ID)
+                </th>
+
+
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+
+
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Designation_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Occupation)
+                </th>*@
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.PartnerID)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerCNIC)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.PartnerONIC)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerShare)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerContactNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerMobileNo)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.PartnerCitizenNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerPassportNo)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrgDoc_ID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+
+                    @*    <td>
+                        @Html.DisplayFor(modelItem => item.Designation_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Occupation)
+                    </td>*@
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PartnerID })
+                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+}
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

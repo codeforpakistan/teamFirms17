@@ -1,0 +1,108 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlADDRESSS>
+@{
+    ViewBag.Title = "SocietyAddresses";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+ @section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+<ol class="breadcrumb">
+    <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li><a href="/SocietyNGO">Society</a></li>   
+    <li class="active">Society Address</li>
+</ol>
+
+<p>
+    @Html.ActionLink("Add Society Address", "CreateSocietyAddress") /
+    @Html.ActionLink("Add NGO/Society Governing Body", "NGOGoverningBody", "Partner") /
+    @Html.ActionLink("Add Witness", "CreateSocietyWitness", "Witness")
+
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AdressID)
+        </th>
+        <th>
+           Society
+        </th>
+        <th>
+           Address Type
+        </th>
+        <th>
+            AdressDetails
+        </th>
+        <th>
+           Tehsil Name
+        </th>
+        <th>
+            Entery By
+           
+        </th>
+
+        <th>
+           Is Active
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsActiveDate)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdressID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrgName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdressTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdressDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TehsilName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.IsActiveDate)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "UpdateSocietyAddress", new { id = item.AdressID })
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+}
+
+
+
+
+@section FooterArea{
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}

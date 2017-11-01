@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlADDRESSS>
+
+<table class="table table-responsive table-striped table-bordered">
+    <tr>
+        <th>
+           Address Type
+        </th>
+        <th>
+           Address Detail
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AdressTypeName
+            </td>
+            <td>
+                @item.AdressDetails
+            </td>
+ 
+        </tr>
+    }
+</table>
+

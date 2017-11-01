@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BusinessLayer.MdlClasses.MdlRenewalReport>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_FirmLayout.cshtml";
+}
+
+ 
+
+@section Header{
+    @Html.Partial("~/Views/Shared/PartialViews/_Header.cshtml")
+}
+
+@section Sidebar{
+    @Html.Partial("~/Views/Shared/PartialViews/_SideBar.cshtml")
+}
+
+
+@section BodyContent{
+ 
+<ol class="breadcrumb">
+    <li><a href="/Home"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li class="active">Renewal Report</li>
+</ol>
+
+<p>
+    @Html.ActionLink("New Renewal Report", "Create")
+</p>
+
+    <table id="example1" class="table table-striped table-responsive table-fixedheader  table-bordered ">
+    <thead>
+        <tr>
+            <th>
+                Org Name
+            </th>
+            <th>
+                Report Year
+
+            </th>
+            <th>
+                Submission Date
+            </th>
+          
+            <th>
+                Resolution Date
+            </th>
+            <th>
+                Authority Letter
+            </th>
+             
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                   
+                    @Html.DisplayFor(modelItem => item.OrgName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RReportYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubmissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RRResolutionDateString)
+                </td>
+                <td>
+                   <input type="checkbox" checked="@item.IsAuthorityLetter" />
+                </td>
+ 
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RReportID})
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+}
+
+
+
+
+@section FooterArea{
+
+    @Html.Partial("~/Views/Shared/PartialViews/_Footer.cshtml")
+
+
+}
+
+
